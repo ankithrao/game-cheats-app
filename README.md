@@ -64,4 +64,4 @@ npx expo start --web
 
 ## 🧑‍💻 Author
 
-Built by [Ankith].
+Built by Ankith Ranuva.
