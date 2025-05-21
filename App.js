@@ -1,27 +1,26 @@
 import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Provider } from 'react-redux';
+import { Provider as PaperProvider } from 'react-native-paper'; // <-- added for styled buttons
 import store from './src/redux/store';
-import { View, Text, Button } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchMessage } from './src/redux/slices/testSlice';
 
-const Home = () => {
-  const dispatch = useDispatch();
-  const message = useSelector((state) => state.test.message);
-  const loading = useSelector((state) => state.test.loading);
+import IntroSlides from './src/screens/IntroSlides';
+import Home from './src/screens/Home';
 
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Button title="Fetch Message" onPress={() => dispatch(fetchMessage())} />
-      {loading ? <Text>Loading...</Text> : <Text>{message}</Text>}
-    </View>
-  );
-};
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
     <Provider store={store}>
-      <Home />
+      <PaperProvider>
+        <NavigationContainer>
+          <Stack.Navigator initialRouteName="Intro" screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="Intro" component={IntroSlides} />
+            <Stack.Screen name="Home" component={Home} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </PaperProvider>
     </Provider>
   );
 }
