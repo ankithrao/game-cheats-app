@@ -9,21 +9,20 @@ A React Native Expo app that provides AI-generated game cheats based on the game
 ```
 
 /src
-/redux
-store.js          # Redux store configuration
-/slices
-testSlice.js    # Sample slice with Redux Toolkit + Thunk
-/components
-SlideControls.js  # Slide navigation buttons (Back, Next, Skip)
-/screens
-IntroSlides.js    # Intro slideshow screen
-Home.js           # Home screen placeholder
-/styles
-SlideControls.styles.js   # Styles for SlideControls component
-IntroSlides.styles.js     # Styles for IntroSlides screen
-App.js                # Entry point with Redux Provider and Navigation
-
-````
+  /components
+    ExitModal.js        # Custom modal shown on exit
+  /redux
+    store.js            # Redux store configuration
+    /slices
+      testSlice.js      # Sample slice with Redux Toolkit + Thunk
+  /screens
+    Home.js             # Main screen after intro
+    IntroSlides.js      # Intro slides for first-time users
+  /styles
+    Home.styles.js      # Separated styles for Home
+    IntroSlides.styles.js
+App.js                  # Entry point with navigation & AsyncStorage
+```
 
 ---
 
@@ -32,57 +31,48 @@ App.js                # Entry point with Redux Provider and Navigation
 - **React Native (Expo)**
 - **Redux Toolkit**
 - **Redux Thunk**
-- **React Native for Web (Expo Web Support)**
-- **react-native-swiper** (for intro slides)
-- **expo-image** (for animated GIF support on Android)
-- **react-native-vector-icons** (for icon buttons)
+- **AsyncStorage**
+- **react-native-swiper**
+- **React Navigation**
 
 ---
 
 ## 📦 Setup Instructions
 
 ```bash
-# 1. Clone or download the project
-git clone <your-repo-url>
+# 1. Clone the repo
+git clone https://github.com/ankithrao/game-cheats-app.git
+cd game-cheats-app
 
 # 2. Install dependencies
 npm install
 
-# 3. Run on web or mobile
+# 3. Start the app
 npx expo start
-````
-
-Use the Expo Go app on iOS or Android to preview on device.
+```
 
 ---
 
 ## ✅ Current Progress (as of May 2025)
 
-* Project initialized with **Expo (JavaScript)**.
-* Added **Redux Toolkit** for state management.
-* Setup **Redux Thunk** with a basic async example (`fetchMessage`).
-* Connected Redux to UI using `useDispatch` and `useSelector`.
-* Initialized Git repository with `.gitignore` (ignoring `node_modules/`, `.expo/`, `package-lock.json`).
-* Added animated **intro slides** using `react-native-swiper` with:
-
-  * GIF animations via `expo-image` for cross-platform support.
-  * Slide controls with **Skip**, **Back (arrow icon)**, and **Next/Start (arrow/checkmark icons)** buttons.
-  * Buttons positioned as: Skip (top-right), Back (bottom-left), Next (bottom-right).
-  * Responsive and visually aligned layout with centered images and text.
-* Navigation flow from intro slides to home screen implemented.
-* Modularized styles in `/src/styles` and separated components for cleaner structure.
-
----
-
-## 🔜 Coming Next
-
-* Input form for game name and platform selection.
-* Integration with ChatGPT API to generate game cheats.
-* Display cheats with graphical UI components.
+- Project initialized with **Expo (JavaScript)**.
+- Added **Redux Toolkit** and **Redux Thunk** for state management.
+- Setup **AsyncStorage** to detect first-time launch.
+- Implemented **intro slides** with animated GIFs using `react-native-swiper`.
+- Slides are shown only **once** for first-time users.
+- Designed a **custom Exit Modal** on back press with a GIF, cringe message, and cancel/continue buttons.
+- Styled using separate modular **style files per screen**.
+- Slide and modal UI tested on both **web and Android (via Expo Go)**.
 
 ---
 
 ## 📌 Version History
+
+### v0.4.0 — May 30, 2025
+
+* Added custom exit modal with cringe message, GIF, and Cancel/Continue buttons on app exit.
+* Ensured exit modal only shows on back press from Home screen.
+* Fixed first-time launch logic to show intro slides only once.
 
 ### v0.3.0 — May 22, 2025
 
@@ -94,6 +84,16 @@ Use the Expo Go app on iOS or Android to preview on device.
 
 * Set up Redux Toolkit and Thunk.
 * Created initial app structure and home screen placeholder.
+
+
+---
+
+## 🔜 Coming Next
+
+- Input form for game name and platform.
+- AI prompt generation using OpenAI (ChatGPT API).
+- Display results in a visual format with styles/icons.
+- Basic navigation and UI polish.
 
 ---
 
