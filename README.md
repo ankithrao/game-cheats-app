@@ -76,7 +76,7 @@ src/
 
 ## 🧑‍💻 Author
 
-Made with ❤️ by **[Your Name]**  
+Made with ❤️ by Ankith Ranuva 
 📧 your@email.com
 
 ---
