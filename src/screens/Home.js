@@ -18,11 +18,16 @@ import {
 import TypewriterText from "../components/TypewriterText";
 import AppInfoPopup from "../components/AppInfoPopup";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import PlatformCards from "../components/PlatformCards";
+import { isEmpty, isNull } from "lodash";
 
 const Home = () => {
   const [showExit, setShowExit] = useState(false);
   const [search, setSearch] = useState("");
   const [showInfo, setShowInfo] = useState(false);
+  const [showPlatforms, setShowPlatforms] = useState(false);
+  const [selectedPlatforms, setSelectedPlatforms] = useState([]);
+
   const offsetY = useRef(new Animated.Value(0)).current;
   const rotation = useRef(new Animated.Value(0)).current;
 
@@ -67,6 +72,12 @@ const Home = () => {
     };
   }, []);
 
+  useEffect(() => {
+    if (showPlatforms && (isEmpty(search) || isNull(search))) {
+      setShowPlatforms(false);
+    }
+  }, [search, showPlatforms]);
+
   const handleExit = () => {
     BackHandler.exitApp();
   };
@@ -79,6 +90,18 @@ const Home = () => {
     }).start();
 
     setShowInfo(!showInfo);
+  };
+
+  const handlePlatformSelect = (platformName) => {
+    setSelectedPlatforms((prevSelected) => {
+      if (prevSelected.includes(platformName)) {
+        // If already selected, remove it
+        return prevSelected.filter((p) => p !== platformName);
+      } else {
+        // Else, add it
+        return [...prevSelected, platformName];
+      }
+    });
   };
 
   if (!fontsLoaded) return null;
@@ -116,6 +139,12 @@ const Home = () => {
           style={styles.searchInput}
           value={search}
           onChangeText={setSearch}
+          onSubmitEditing={() => {
+            if (search.trim()) {
+              setShowPlatforms(true);
+              Keyboard.dismiss();
+            }
+          }}
         />
       </Animated.View>
 
@@ -139,6 +168,12 @@ const Home = () => {
         </TouchableOpacity>
         <AppInfoPopup visible={showInfo} />
       </View>
+      {showPlatforms && (
+        <PlatformCards
+          onSelect={handlePlatformSelect}
+          selectedPlatforms={selectedPlatforms}
+        />
+      )}
     </View>
   );
 };
