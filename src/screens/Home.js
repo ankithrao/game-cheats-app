@@ -20,13 +20,19 @@ import AppInfoPopup from "../components/AppInfoPopup";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import PlatformCards from "../components/PlatformCards";
 import { isEmpty, isNull } from "lodash";
+import { useDispatch, useSelector } from "react-redux";
+import { setSearchQuery, togglePlatform } from "../redux/slices/searchSlice";
+import { useNavigation } from '@react-navigation/native';
 
 const Home = () => {
+  const dispatch = useDispatch();
+  const navigation = useNavigation();
+  const selectedPlatforms = useSelector((state) => state.search.selectedPlatforms);
+
   const [showExit, setShowExit] = useState(false);
   const [search, setSearch] = useState("");
   const [showInfo, setShowInfo] = useState(false);
   const [showPlatforms, setShowPlatforms] = useState(false);
-  const [selectedPlatforms, setSelectedPlatforms] = useState([]);
 
   const offsetY = useRef(new Animated.Value(0)).current;
   const rotation = useRef(new Animated.Value(0)).current;
@@ -78,6 +84,12 @@ const Home = () => {
     }
   }, [search, showPlatforms]);
 
+  useEffect(() => {
+    if (showPlatforms && search.trim() && selectedPlatforms.length > 0) {
+      navigation.navigate("CheatResults");
+    }
+  }, [selectedPlatforms]);
+
   const handleExit = () => {
     BackHandler.exitApp();
   };
@@ -88,20 +100,11 @@ const Home = () => {
       duration: 600,
       useNativeDriver: true,
     }).start();
-
     setShowInfo(!showInfo);
   };
 
   const handlePlatformSelect = (platformName) => {
-    setSelectedPlatforms((prevSelected) => {
-      if (prevSelected.includes(platformName)) {
-        // If already selected, remove it
-        return prevSelected.filter((p) => p !== platformName);
-      } else {
-        // Else, add it
-        return [...prevSelected, platformName];
-      }
-    });
+    dispatch(togglePlatform(platformName));
   };
 
   if (!fontsLoaded) return null;
@@ -141,7 +144,11 @@ const Home = () => {
           onChangeText={setSearch}
           onSubmitEditing={() => {
             if (search.trim()) {
+              dispatch(setSearchQuery(search.trim()));
               setShowPlatforms(true);
+              if (selectedPlatforms.length > 0) {
+                navigation.navigate("CheatResults");
+              }
               Keyboard.dismiss();
             }
           }}

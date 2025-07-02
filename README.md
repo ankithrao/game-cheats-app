@@ -1,3 +1,4 @@
+
 # 🎮 CheatMate - Game Cheats App
 
 CheatMate is a React Native app built with Expo that provides cheat codes and tips for popular games across different platforms. It’s designed to be fast, fun, and user-friendly.
@@ -7,79 +8,90 @@ CheatMate is a React Native app built with Expo that provides cheat codes and ti
 ## 🚀 Features
 
 - 🖼️ Intro slider with animations and icon-based navigation  
-- 🔍 Animated search bar with game search capability  
+- 🔍 Animated search bar with game query input  
 - 🎮 Typewriter-style welcome message with pixelated font  
-- 📱 Redux Toolkit and Thunk for state management  
-- 📦 Fully styled screens with modular stylesheets  
+- 🕹️ Platform selector (PC, PS4, PS5) with animations and multiselect  
+- 💬 AI-generated cheats using DeepSeek (free tier)  
+- 📱 Redux Toolkit and Thunk for global state management  
+- 📦 Modular, reusable components and stylesheets  
 - 🛑 Exit modal on Android back press  
-- 💬 Floating joystick icon that reveals app info with animation  
-- 📚 Smooth animated pop-up for app details  
-- 💡 Clean, modern UI optimized for mobile experience  
+- 🎮 Floating joystick icon with animated app info popup  
+- ⚠️ Full error handling, loading indicators, and retry option  
+- 🧠 Neatly formatted cheat output with section titles and clean display  
+- 💡 Clean, modern dark UI optimized for mobile  
 
 ---
 
 ## ✨ Tech Stack
 
 - **React Native** with **Expo**  
-- **Redux Toolkit** + **Thunk**  
+- **Redux Toolkit** + **Redux Thunk**  
 - **React Navigation**  
+- **DeepSeek LLM API**  
+- **Lodash** utilities  
 - **Typewriter animation**  
 - **Animated API**  
-- **Custom Modal & Popups**  
+- **Custom modals & animated popups**  
 - **Google Fonts (PressStart2P)**  
-- **Ionicons** and **MaterialCommunityIcons**
+- **Ionicons**, **MaterialCommunityIcons**
 
 ---
 
 ## 📂 Project Structure
 
+```
 src/
+├── api/
+│   └── chatgpt.js (now using DeepSeek)
 ├── components/
-│ ├── ExitModal.js
-│ ├── TypewriterText.js
-│ └── AppInfoPopup.js
+│   ├── AppInfoPopup.js
+│   ├── ExitModal.js
+│   ├── PlatformCards.js
+│   └── TypewriterText.js
+├── redux/
+│   ├── slices/
+│   │   └── searchSlice.js
+│   └── store.js
 ├── screens/
-│ └── Home.js
+│   ├── Home.js
+│   └── CheatResults.js
 ├── styles/
-│ ├── Home.styles.js
-│ └── AppInfoPopup.styles.js
-└── redux/
-└── store.js
-
-yaml
-Copy
-Edit
+│   ├── AppInfoPopup.styles.js
+│   ├── CheatResults.styles.js
+│   ├── Home.styles.js
+│   └── PlatformCards.styles.js
+```
 
 ---
 
 ## 📌 Version History
 
-### v0.5.0 — June 13, 2025
+### ✅ v0.6.0 — June 13, 2025  
+- 🤖 Integrated DeepSeek AI to fetch cheat codes by query and platform  
+- 📄 Created CheatResults screen with markdown-style formatting  
+- 🔁 Error/retry UI and graceful fallback for failed requests  
+- ⏳ Added loading indicators and loader UI state  
 
-- 🖱️ Added platform card selector (PC, PS4, PS5) with animations
-- 🎯 Single selection logic with visual feedback (grayed out unselected cards)
-- 🌟 Platform icons now animate on selection (scale effect and glow)
-- 📦 Game query and selected platform stored in Redux
-- 🧪 Utility enhancements using `lodash` (`isEmpty`, `isNull`)
+### v0.5.0 — June 13, 2025  
+- 🖱️ Added platform card selector (PC, PS4, PS5) with animations  
+- 🧠 Multi-selection with icon and glow on selection  
+- 🎯 Platform & game search query stored in Redux  
+- 🧪 Used `lodash` for utility validations (`isEmpty`, `isNull`)  
 
-### v0.4.0 — June 1, 2025
+### v0.4.0 — June 1, 2025  
+- 💬 Added joystick icon at bottom right with 360° spin and popup info  
+- 🎮 Replaced user icon with gamepad variant  
+- 🕹️ Added pixel-style typewriter welcome animation  
+- 🔄 Smooth show/hide for app info popup  
 
-- 💬 Added joystick icon at bottom right with 360° spin and animated popup info box  
-- 🎮 Replaced user icon with gamepad variant for a fun touch  
-- 🕹️ Added pixel-style typewriter welcome text animation  
-- 🔄 Smooth show/hide animations for info popup  
-- 🎨 Clean styling and icon polish  
+### v0.3.0 — May 22, 2025  
+- ✅ Completed intro slides with animations  
+- 🐛 Fixed Android GIF support  
+- 🎨 Icon-based navigation for slider  
 
-### v0.3.0 — May 22, 2025
-
-- ✅ Completed intro slides with animations and navigation controls.  
-- 🐛 Fixed Android GIF support using `expo-image`.  
-- 🎨 Enhanced UI with icon-based slide navigation buttons.  
-
-### v0.2.0 — May 20, 2025
-
-- 🧠 Set up Redux Toolkit and Thunk.  
-- 🏠 Created initial app structure and home screen placeholder.  
+### v0.2.0 — May 20, 2025  
+- 🧠 Redux Toolkit and Thunk set up  
+- 🏠 Initial home screen UI  
 
 ---
 
@@ -95,3 +107,11 @@ Made with ❤️ by Ankith Ranuva
 ```bash
 npm install
 npx expo start
+```
+
+---
+
+## 🧊 Status
+
+🚧 Codebase frozen @ v0.6.0  
+✨ UI/UX and sidebar enhancements coming next!
